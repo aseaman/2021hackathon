@@ -1,7 +1,7 @@
 <script>
   import Layout from '@Components/Layout';
   import Circle from '@Components/Circle';
-//  import Euclidean from '@Components/Euclidean';
+ import Euclidean from '@Components/Euclidean';
 
   const rhythm = [1,0,0,1,0,2];
 
@@ -27,7 +27,7 @@
       <Circle {rhythm} />
     </div>
     <div class="container__middle">
-      <!-- <Euclidean /> !-->
+      <Euclidean />
     </div>
   </div>
 </Layout>
