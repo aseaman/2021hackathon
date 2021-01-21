@@ -1,0 +1,22 @@
+{
+	"name": "2021hackathon",
+	"version": "0.1.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "jest"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/aseaman/2021hackathon.git"
+	},
+	"author": "Aaron Seaman",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/aseaman/2021hackathon/issues"
+	},
+	"homepage": "https://github.com/aseaman/2021hackathon#readme",
+	"devDependencies": {
+		"jest": "^26.6.3"
+	}
+}
