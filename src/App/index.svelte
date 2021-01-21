@@ -1,6 +1,7 @@
 <script>
     import Layout from '@Components/Layout';
-    import Circle from '@Components/Circle';
+		import Circle from '@Components/Circle';
+		import Euclidean from '@Components/Euclidean';
 </script>
 
 <style src="./style.scss">
@@ -13,7 +14,7 @@
             <Circle />
         </div>
         <div class="container__middle">
-            Hello World
-        </div>
+            <Euclidean />
+				</div>
     </div>
 </Layout>
