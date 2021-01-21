@@ -31,7 +31,7 @@ var poltocar = ( half, angle ) => {
 
 const intervalId = setInterval(() => {
   led.x = led.x + 5;
-  led.x > graphSize && led.x = 0;
+  if (led.x > graphSize) led.x = 0;
 }, 500);
 
 
