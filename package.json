@@ -60,6 +60,7 @@
     "es6-promise": "^4.2.8",
     "isomorphic-fetch": "^2.2.1",
     "query-string": "^5.1.1",
+    "tone": "^14.7.77",
     "whatwg-fetch": "^3.0.0"
   },
   "repository": {
