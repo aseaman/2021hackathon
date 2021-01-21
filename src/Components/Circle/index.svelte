@@ -1,5 +1,7 @@
 <script>
-  export let rhythm = [0,1,0,0,2];
+  export let rhythm = [0,1,0,0,1];
+  export let active = 0;
+
   const graphSize = 600;
   const svgSize = graphSize + 0.1 * graphSize; // making sure nothing gets clipped
 
@@ -20,22 +22,22 @@
   }
 
   let leds = {
-    size: graphSize / 25,
-    colors: ["#051e3e", "#451e3e", "#851e3e"]
+    sizes: {active: 25, default: 20},
+    // colors: ["#051e3e", "#451e3e", "#851e3e"]
+    colors: ["#081c15", "#74c69d", "#2d6a4f", "#d8f3dc"] // silent step, onset, active silent step, active onset 
   };
 
-  function blink(rhythm) {
+  function blink(active) {
     const arc = 360 / rhythm.length;
-    // const onsets = rhythm.reduce(step => step > 0);
     rhythm.map((step, index) => {
       leds[index] = {};
-      leds[index].fill = leds.colors[step];
-        //step == 2 ? "red" : step == 1 ? "blue" : "gray";
+      leds[index].fill = index === active ? leds.colors[step+2] : leds.colors[step];
+      leds[index].size = index === active ? leds.sizes.active : leds.sizes.default;
       leds[index].coords = poltocar(arc * (index+1));
     });
   };
-
-  $: blink(rhythm);
+ 
+  $: blink(active);
 
 </script>
 <style src="./style.scss">
@@ -43,6 +45,6 @@
 </style>
 <svg width={svgSize} height={svgSize}>
   {#each rhythm as step, i}
-    <circle fill={leds[i].fill} cx={leds[i].coords.x} cy={leds[i].coords.y} r={leds.size} />
+    <circle fill={leds[i].fill} cx={leds[i].coords.x} cy={leds[i].coords.y} r={leds[i].size} />
   {/each}
 </svg>

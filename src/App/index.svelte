@@ -1,18 +1,14 @@
 <script>
   import Layout from '@Components/Layout';
   import Circle from '@Components/Circle';
- import Euclidean from '@Components/Euclidean';
+  import Euclidean from '@Components/Euclidean';
 
-  const rhythm = [1,0,0,1,0,2];
-
+  const rhythm = [1,0,0,1,0,1];
+  let active = 0;
 
   // testing 
   setInterval(() => {
-    const activeIndex = rhythm.indexOf(2)
-    let nextActiveIndex = rhythm.indexOf(1, activeIndex);
-    nextActiveIndex = nextActiveIndex == -1 ? rhythm.indexOf(1) : nextActiveIndex;
-    rhythm[activeIndex] = 1;
-    rhythm[nextActiveIndex] = 2;
+    active = (active + 1) % rhythm.length;
   }, 1000);
 
 </script>
@@ -24,7 +20,7 @@
 <Layout>
   <div class="container">
     <div class="container__top">
-      <Circle {rhythm} />
+      <Circle {rhythm} {active} />
     </div>
     <div class="container__middle">
       <Euclidean />
