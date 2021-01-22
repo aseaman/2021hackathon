@@ -1,6 +1,7 @@
 <script>
   export let tick = 0;
-  import * as Tone from "tone";
+//  import * as Tone from "tone";
+  export let Tone; // importing dynamically because of an issue in Chrome, see https://github.com/Tonejs/Tone.js/issues/443
   import generateEuclideanRhythm from '../../euclidean_rhythm';
   import Circle from '@Components/Circle';
 
@@ -11,6 +12,7 @@
   const offset = tick;
   $: localTick = tick - offset;
 
+  let sequence = null;
   let pattern = [];
   let isPlaying = false;
   let onsets = 3;
@@ -33,8 +35,10 @@
       circlepat = pattern;
       active = 0;
       const notes = pattern.map((e, index) => e ? 'B1' : null);
-      const sequence = new Tone.Sequence((time, note) => {
-        console.log('in seq', note, time);
+      if (sequence && !sequence.disposed) {
+        sequence.dispose();
+      }
+      sequence = new Tone.Sequence((time, note) => {
         active = (active + 1) % circlepat.length
         synth.triggerAttackRelease(note, "8n", time);
       }, notes).start(0);
