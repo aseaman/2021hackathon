@@ -1,8 +1,10 @@
 <script>
-  export let tick = 0;
-  export let Tone; // importing dynamically because of an issue in Chrome, see https://github.com/Tonejs/Tone.js/issues/443
   import generateEuclideanRhythm from '../../euclidean_rhythm';
   import Circle from '@Components/Circle';
+	
+	export let ind;
+	export let tick = 0;
+  export let Tone; // importing dynamically because of an issue in Chrome, see https://github.com/Tonejs/Tone.js/issues/443
 
   // tick starts at App initialization
   // localTick starts when Euclidean component mounts
@@ -109,44 +111,42 @@
 <style src="./style.scss"></style>
 
 <div class="container">
-  <div class="container__top">
-    <Circle pattern={circlepat} {active} ind=0 />
+  <div class="container__circle">
+    <Circle pattern={circlepat} {active} {ind} />
   </div>
-  <div class="container__middle">
-    <div class="container__euclid-controls">
-      <div class="form__row">
-        <div class="form__group">
-          <input id="onsets" class="form__field" placeholder="Onsets" bind:value={onsets} />
-          <label for="onsets" class="form__label">Onsets</label>
-        </div>
-        <div class="form__group">
-          <input id="steps" class="form__field" placeholder="Steps" bind:value={steps} />
-          <label for="steps" class="form__label">Steps</label>
-        </div>
-      </div>
-      <div class="form__row">
-        <label for="voice" class="form__select-label">Voice</label>
-        <div id="voice" class="form__select">
-          <select bind:value={voice}>
-            <option value="synth">Synth</option>
-            <option value="kick">Kick</option>
-            <option value="snare">Snare</option>
-            <option value="hihat">Hihat</option>
-            <option value="tom">Tom</option>
-          </select>
-        </div>
-        <button class="play-pause" on:click={handlePlayPattern}>
-          {#if isPlaying}
-          <svg xmlns="http://www.w3.org/2000/svg" width="16pt" height="16pt" viewBox="0 0 16 16">
-            <path d="M5 5h2v6H5zm4 0h2v6H9zm0 0"/>
-          </svg>
-          {:else}
-          <svg xmlns="http://www.w3.org/2000/svg" width="16pt" height="16pt" viewBox="0 0 16 16">
-            <path d="M5 4l6 4-6 4zm0 0"/>
-          </svg>
-          {/if}
-        </button>
-      </div>
-    </div>
-  </div>
+	<div class="container__euclid-controls">
+		<div class="form__row">
+			<div class="form__group">
+				<input id="onsets" class="form__field" placeholder="Onsets" bind:value={onsets} />
+				<label for="onsets" class="form__label">Onsets</label>
+			</div>
+			<div class="form__group">
+				<input id="steps" class="form__field" placeholder="Steps" bind:value={steps} />
+				<label for="steps" class="form__label">Steps</label>
+			</div>
+		</div>
+		<div class="form__row">
+			<label for="voice" class="form__select-label">Voice</label>
+			<div id="voice" class="form__select">
+				<select bind:value={voice}>
+					<option value="synth">Synth</option>
+					<option value="kick">Kick</option>
+					<option value="snare">Snare</option>
+					<option value="hihat">Hihat</option>
+					<option value="tom">Tom</option>
+				</select>
+			</div>
+			<button class="play-pause" on:click={handlePlayPattern}>
+				{#if isPlaying}
+				<svg xmlns="http://www.w3.org/2000/svg" width="16pt" height="16pt" viewBox="0 0 16 16">
+					<path d="M5 5h2v6H5zm4 0h2v6H9zm0 0"/>
+				</svg>
+				{:else}
+				<svg xmlns="http://www.w3.org/2000/svg" width="16pt" height="16pt" viewBox="0 0 16 16">
+					<path d="M5 4l6 4-6 4zm0 0"/>
+				</svg>
+				{/if}
+			</button>
+		</div>
+	</div>
 </div>

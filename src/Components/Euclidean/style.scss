@@ -4,6 +4,12 @@ $white: #fff;
 $darkgray: #696969;
 $gray: #9b9b9b;
 
+.container__circle {
+	position: fixed;
+	top: 15%;
+	right: 50%;
+}
+
 .container__euclid-controls {
 	width: 400px;
 }
