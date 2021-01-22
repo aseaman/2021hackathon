@@ -1,6 +1,8 @@
 <script>
   import Layout from '@Components/Layout';
   import Euclidean from '@Components/Euclidean';
+  //temp
+  import Circle from '@Components/Circle';
 
   let Tone;
 
@@ -13,12 +15,24 @@
       Tone = module
     });
   }
+  // temp
+  let p = [1,0,0,1,0,1];
+  let active = tick % p.length
 </script>
 
-{#if Tone}
-  <Layout>
+<style src="./style.scss"></style>
+
+<Layout>
+  <!--
+    <Circle pattern={p} {active} ind=0 />
+    <Circle pattern={p} {active} ind=1 />
+    <Circle pattern={p} {active} ind=2 />
+    <Circle pattern={p} {active} ind=3 />
+    <Circle pattern={p} {active} ind=4 />
+  -->
+  {#if Tone}
     <Euclidean {Tone} {tick} />
-  </Layout>
-{:else}
-  <button on:click={handleInit}>Click to init</button>
-{/if}
+  {:else}
+    <button class="init" on:click={handleInit}>Start</button>
+  {/if}
+</Layout>

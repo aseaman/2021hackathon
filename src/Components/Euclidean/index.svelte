@@ -24,7 +24,7 @@
     A2: 'kick.mp3',
     A3: 'hihat.mp3',
     A4: 'tom1.mp3'
-    },
+  },
     {
       volume: 5,
       release: 1,
@@ -48,7 +48,7 @@
       active = 0;
       let notes = [];
       if (voice === 'synth') {
-        notes = pattern.map((e, index) => e ? 'B2' : null);
+        notes = pattern.map((e) => e ? 'B2' : 'E6');
       } else {
         let drumNote = '';
         switch (voice) {
@@ -68,19 +68,23 @@
             drumNote = 'A1';
             break;
         }
-        notes = pattern.map((e, index) => e ? drumNote : null);
+        notes = pattern.map((e) => e ? drumNote : 'E6');
       }
       console.log(notes);
       if (sequence && !sequence.disposed) {
         sequence.dispose();
       }
       sequence = new Tone.Sequence((time, note) => {
-        active = (active + 1) % circlepat.length
-        if (voice === 'synth') {
-          synth.triggerAttackRelease(note, "8n", time);
-        } else {
-          drumTest.triggerAttackRelease(note, "8n", time);
+        if( note !== "E6" ) {
+          if (voice === 'synth') {
+            synth.triggerAttackRelease(note, "8n", time);
+          } else {
+            drumTest.triggerAttackRelease(note, "8n", time);
+          }
         }
+        Tone.Draw.schedule(function() {
+          active = (active + 1) % circlepat.length
+        }, time);
       }, notes).start(0);
       Tone.Transport.start();
     }
@@ -90,11 +94,12 @@
   handleGeneratePattern(); 
   let circlepat = pattern;
   let active = 0;
+
 </script>
 
 <div class="container">
   <div class="container__top">
-    <Circle pattern={circlepat} {active} />
+    <Circle pattern={circlepat} {active} ind=0 />
   </div>
   <div class="container__middle">
     <div>
