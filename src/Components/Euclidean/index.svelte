@@ -42,7 +42,9 @@
     }
 
     if (isPlaying) {
-      Tone.Transport.stop();
+      if (sequence && !sequence.disposed) {
+        sequence.stop();
+      }
     } else {
       circlepat = pattern;
       active = 0;
@@ -86,7 +88,12 @@
           active = (active + 1) % circlepat.length
         }, time);
       }, notes).start(0);
-      Tone.Transport.start();
+
+      if (Tone.Transport.state !== 'started') {
+        console.log('starting transport');
+        Tone.Transport.start();
+      }
+      sequence.start();
     }
     isPlaying = !isPlaying;
   }
