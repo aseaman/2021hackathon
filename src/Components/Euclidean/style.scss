@@ -1,0 +1,149 @@
+$primary: #081c15;
+$secondary: #74c69d;
+$white: #fff;
+$darkgray: #696969;
+$gray: #9b9b9b;
+
+.container__euclid-controls {
+	width: 400px;
+}
+
+.form__row {
+	display: flex;
+	margin: 10px;
+	align-items: center;
+}
+
+.form__group {
+  position: relative;
+  padding: 1rem 1rem 0 1rem;
+  margin-top: 10px;
+  width: 50%;
+}
+
+.form__field {
+  font-family: inherit;
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid $gray;
+  outline: 0;
+  font-size: 1.3rem;
+  color: $white;
+  padding: 7px 0;
+  background: transparent;
+  transition: border-color 0.2s;
+
+  &::placeholder {
+    color: transparent;
+  }
+
+  &:placeholder-shown ~ .form__label {
+    font-size: 1.3rem;
+    cursor: text;
+    top: 20px;
+  }
+}
+
+.form__label {
+  position: absolute;
+  top: 0;
+  display: block;
+  transition: 0.2s;
+  font-size: 1rem;
+  color: $gray;
+}
+
+.form__select-label {
+	font-size: 1rem;
+	color: $gray;
+	padding: 0 1rem;
+}
+
+.form__field:focus {
+  ~ .form__label {
+    position: absolute;
+    top: 0;
+    display: block;
+    transition: 0.2s;
+    font-size: 1rem;
+    color: $secondary;
+    font-weight:700;
+  }
+  padding-bottom: 6px;
+  font-weight: 700;
+	border-width: 3px;
+	border-color: $secondary;
+  // border-image: linear-gradient(to right, $primary,$secondary);
+  // border-image-slice: 1;
+}
+/* reset input */
+.form__field{
+  &:required,&:invalid { box-shadow:none; }
+}
+
+/* Reset Select */
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+	// background: #2c3e50;
+	background: $darkgray;
+  background-image: none;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select */
+.form__select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  line-height: 3;
+	// background: #2c3e50;
+	background: $darkgray;
+  overflow: hidden;
+  // border-radius: .25em;
+}
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+/* Arrow */
+.form__select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: $primary;
+  cursor: pointer;
+  pointer-events: none;
+  -webkit-transition: .25s all ease;
+  -o-transition: .25s all ease;
+  transition: .25s all ease;
+}
+/* Transition */
+.form__select:hover::after {
+  color: $secondary;
+}
+
+.play-pause {
+	height: 48px;
+	width: 48px;
+	background-color: $primary;
+	border: none;
+	cursor: pointer;
+	margin: 0 1rem;
+
+	&:hover {
+		fill: $secondary;
+	}
+}

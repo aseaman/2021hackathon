@@ -32,7 +32,7 @@
     }
   ).toDestination();
 
-  function handleGeneratePattern() {
+  function generatePattern() {
     pattern = generateEuclideanRhythm(onsets, steps);
   }
 
@@ -40,6 +40,8 @@
     if (pattern.length === 0) {
       return;
     }
+
+    generatePattern();
 
     if (isPlaying) {
       if (sequence && !sequence.disposed) {
@@ -98,35 +100,53 @@
     isPlaying = !isPlaying;
   }
 
-  handleGeneratePattern(); 
+  generatePattern(); 
   let circlepat = pattern;
   let active = 0;
 
 </script>
+
+<style src="./style.scss"></style>
 
 <div class="container">
   <div class="container__top">
     <Circle pattern={circlepat} {active} ind=0 />
   </div>
   <div class="container__middle">
-    <div>
-      <label for="onsets">Onsets</label>
-      <input id="onsets" type="number" min=1 bind:value={onsets} />
-      <label for="steps">Steps</label>
-      <input id="steps" type="number" min=1 bind:value={steps} />
-      <label for="voice">Voice</label>
-      <select bind:value={voice}>
-        <option value="synth">Synth</option>
-        <option value="kick">Kick</option>
-        <option value="snare">Snare</option>
-        <option value="hihat">Hihat</option>
-        <option value="tom">Tom</option>
-      </select>
-      <button on:click={handleGeneratePattern}>Generate Pattern</button>
-      <button on:click={handlePlayPattern}>Play/Pause Pattern</button>
-      <p>
-        Pattern:  {pattern}
-      </p>
+    <div class="container__euclid-controls">
+      <div class="form__row">
+        <div class="form__group">
+          <input id="onsets" class="form__field" placeholder="Onsets" bind:value={onsets} />
+          <label for="onsets" class="form__label">Onsets</label>
+        </div>
+        <div class="form__group">
+          <input id="steps" class="form__field" placeholder="Steps" bind:value={steps} />
+          <label for="steps" class="form__label">Steps</label>
+        </div>
+      </div>
+      <div class="form__row">
+        <label for="voice" class="form__select-label">Voice</label>
+        <div id="voice" class="form__select">
+          <select bind:value={voice}>
+            <option value="synth">Synth</option>
+            <option value="kick">Kick</option>
+            <option value="snare">Snare</option>
+            <option value="hihat">Hihat</option>
+            <option value="tom">Tom</option>
+          </select>
+        </div>
+        <button class="play-pause" on:click={handlePlayPattern}>
+          {#if isPlaying}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16pt" height="16pt" viewBox="0 0 16 16">
+            <path d="M5 5h2v6H5zm4 0h2v6H9zm0 0"/>
+          </svg>
+          {:else}
+          <svg xmlns="http://www.w3.org/2000/svg" width="16pt" height="16pt" viewBox="0 0 16 16">
+            <path d="M5 4l6 4-6 4zm0 0"/>
+          </svg>
+          {/if}
+        </button>
+      </div>
     </div>
   </div>
 </div>
