@@ -11,6 +11,7 @@
   const offset = tick;
   $: localTick = tick - offset;
 
+  let sequence = null;
   let pattern = [];
   let isPlaying = false;
   let onsets = 3;
@@ -33,8 +34,10 @@
       Tone.Transport.stop();
     } else {
       const notes = pattern.map((e, index) => e ? 'B1' : null);
-      const sequence = new Tone.Sequence((time, note) => {
-        console.log('in seq', note, time);
+      if (sequence && !sequence.disposed) {
+        sequence.dispose();
+      }
+      sequence = new Tone.Sequence((time, note) => {
         synth.triggerAttackRelease(note, "8n", time);
       }, notes).start(0);
       Tone.Transport.start();
