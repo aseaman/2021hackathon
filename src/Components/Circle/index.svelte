@@ -1,17 +1,19 @@
 <script>
-  export let rhythm = [0,1,0,0,1];
+  export let pattern;
   export let active = 0;
+  export let ind = 0; // when several Circles are instantiated we keep track of their indices.
 
-  const graphSize = 600;
-  const svgSize = graphSize + 0.1 * graphSize; // making sure nothing gets clipped
+  const circleSize = 600 - ((ind+1) * 100);
+  const svgSize = circleSize + 0.1 * circleSize; // making sure nothing gets clipped
 
   var round = (number) => {
     return parseFloat((Math.floor(number * 100) / 100).toFixed(2));
   }
 
   var poltocar = (angle) => {
+    angle = angle - 90;
     var radius = 0.5;
-    var half = graphSize / 2;
+    var half = circleSize / 2;
     var x = round(
       half + half * radius * Math.cos((Math.PI * angle) / 180)
     );
@@ -28,8 +30,8 @@
   };
 
   function blink(active) {
-    const arc = 360 / rhythm.length;
-    rhythm.map((step, index) => {
+    const arc = 360 / pattern.length;
+    pattern.map((step, index) => {
       leds[index] = {};
       leds[index].fill = index === active ? leds.colors[step+2] : leds.colors[step];
       leds[index].size = index === active ? leds.sizes.active : leds.sizes.default;
@@ -44,7 +46,7 @@
 
 </style>
 <svg width={svgSize} height={svgSize}>
-  {#each rhythm as step, i}
+  {#each pattern as step, i}
     <circle fill={leds[i].fill} cx={leds[i].coords.x} cy={leds[i].coords.y} r={leds[i].size} />
   {/each}
 </svg>
