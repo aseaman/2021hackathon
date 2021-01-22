@@ -16,8 +16,6 @@
   let onsets = 3;
   let steps = 7;
 
-  let active = 0;
-
   const synth = new Tone.MembraneSynth().toDestination();
 
   function handleGeneratePattern() {
@@ -32,9 +30,12 @@
     if (isPlaying) {
       Tone.Transport.stop();
     } else {
+      circlepat = pattern;
+      active = 0;
       const notes = pattern.map((e, index) => e ? 'B1' : null);
       const sequence = new Tone.Sequence((time, note) => {
         console.log('in seq', note, time);
+        active = (active + 1) % circlepat.length
         synth.triggerAttackRelease(note, "8n", time);
       }, notes).start(0);
       Tone.Transport.start();
@@ -43,11 +44,13 @@
   }
 
   handleGeneratePattern(); 
+  let circlepat = pattern;
+  let active = 0;
 </script>
 
 <div class="container">
   <div class="container__top">
-    <Circle {pattern} {active} />
+    <Circle pattern={circlepat} {active} />
   </div>
   <div class="container__middle">
     <div>

@@ -10,7 +10,7 @@
     return parseFloat((Math.floor(number * 100) / 100).toFixed(2));
   }
 
-  var poltocar = (angle) => {
+  $: poltocar = (angle) => {
     angle = angle - 90;
     var radius = 0.5;
     var half = circleSize / 2;
