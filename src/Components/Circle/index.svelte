@@ -2,9 +2,11 @@
   export let pattern;
   export let active = 0;
   export let ind = 0; // when several Circles are instantiated we keep track of their indices.
-
+  ind = parseInt(ind) + 1;
   const circleSize = 600 - ((parseInt(ind) +1) * 90);
-  const padding = circleSize * 0.2; // making sure nothing gets clipped
+  // const padding = circleSize * 0.2; // making sure nothing gets clipped
+  const padding = 700 - circleSize;
+  // const svgSize = circleSize + padding;
   const svgSize = circleSize + padding;
 
   let leds = {};
@@ -42,7 +44,8 @@
 
 <style src="./style.scss"></style>
 
-<svg width={svgSize} height={svgSize}>
+<svg viewBox={`0 0 ${svgSize} ${svgSize}`} >
+  <circle cx={svgSize/2} cy={svgSize/2} r={25 + circleSize/2} fill="white" fill-opacity="0.03"></circle>
   {#each pattern as step, i}
     <circle class={leds[i].class} cx={leds[i].coords.x} cy={leds[i].coords.y} />
   {/each}
