@@ -1,14 +1,10 @@
-$primary: #081c15;
-$secondary: #74c69d;
-$white: #fff;
-$darkgray: #696969;
-$gray: #9b9b9b;
+@import '../../Assets/sass/colors.scss';
 
 .container__circle {
   position: absolute;
   top: 0;
-  left: 50%;
-  width: 50%;
+  left: 35%;
+  width: 65%;
   height: 100%;
 }
 
@@ -33,7 +29,7 @@ $gray: #9b9b9b;
   font-family: inherit;
   width: 100%;
   border: 0;
-  border-bottom: 2px solid $gray;
+  border-bottom: 2px solid $dustygray;
   outline: 0;
   font-size: 1.3rem;
   color: $white;
@@ -58,12 +54,12 @@ $gray: #9b9b9b;
   display: block;
   transition: 0.2s;
   font-size: 1rem;
-  color: $gray;
+  color: $dustygray;
 }
 
 .form__select-label {
   font-size: 1rem;
-  color: $gray;
+  color: $dustygray;
   padding: 0 1rem;
 }
 
@@ -74,15 +70,13 @@ $gray: #9b9b9b;
     display: block;
     transition: 0.2s;
     font-size: 1rem;
-    color: $secondary;
+    color: $deyork;
     font-weight:700;
   }
   padding-bottom: 6px;
   font-weight: 700;
   border-width: 3px;
-  border-color: $secondary;
-  // border-image: linear-gradient(to right, $primary,$secondary);
-  // border-image-slice: 1;
+  border-color: $deyork;
 }
 /* reset input */
 .form__field{
@@ -99,7 +93,7 @@ select {
   box-shadow: none;
   border: 0 !important;
   // background: #2c3e50;
-  background: $darkgray;
+  background: $dovegray;
   background-image: none;
 }
 /* Remove IE arrow */
@@ -114,7 +108,7 @@ select::-ms-expand {
   height: 3em;
   line-height: 3;
   // background: #2c3e50;
-  background: $darkgray;
+  background: $dovegray;
   overflow: hidden;
   // border-radius: .25em;
 }
@@ -131,7 +125,8 @@ select {
   top: 0;
   right: 0;
   padding: 0 1em;
-  background: $primary;
+	background: $gablegreen;
+	color: $dustygray;
   cursor: pointer;
   pointer-events: none;
   -webkit-transition: .25s all ease;
@@ -140,18 +135,27 @@ select {
 }
 /* Transition */
 .form__select:hover::after {
-  color: $secondary;
+  color: $deyork;
 }
 
 .play-pause {
   height: 48px;
   width: 48px;
-  background-color: $primary;
+  background-color: $gablegreen;
   border: none;
   cursor: pointer;
-  margin: 0 1rem;
+	margin: 0 1rem;
+	
+	svg {
+		fill: $dustygray;
+		&:hover {
+			fill: $deyork;
+		}
+	}
 
-  &:hover {
-    fill: $secondary;
-  }
+	&:hover {
+		svg {
+			fill: $deyork;
+		}
+	}
 }

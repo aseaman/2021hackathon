@@ -17,7 +17,8 @@
   let pattern = [];
   let isPlaying = false;
   let onsets = 3;
-  let steps = 7;
+	let steps = 7;
+	let rotate = 0;
   let voice = 'synth';
 
   const synth = new Tone.MembraneSynth().toDestination();
@@ -35,7 +36,7 @@
   ).toDestination();
 
   function generatePattern() {
-    pattern = generateEuclideanRhythm(onsets, steps);
+    pattern = generateEuclideanRhythm(onsets, steps, rotate);
   }
 
   function handlePlayPattern() {
@@ -117,12 +118,16 @@
 	<div class="container__euclid-controls">
 		<div class="form__row">
 			<div class="form__group">
-				<input id="onsets" class="form__field" placeholder="Onsets" bind:value={onsets} />
-				<label for="onsets" class="form__label">Onsets</label>
+				<input id={`onsets${ind}`} class="form__field" placeholder="Onsets" bind:value={onsets} />
+				<label for={`onsets${ind}`} class="form__label">Onsets</label>
 			</div>
 			<div class="form__group">
-				<input id="steps" class="form__field" placeholder="Steps" bind:value={steps} />
-				<label for="steps" class="form__label">Steps</label>
+				<input id={`steps${ind}`} class="form__field" placeholder="Steps" bind:value={steps} />
+				<label for={`steps${ind}`} class="form__label">Steps</label>
+			</div>
+			<div class="form__group">
+				<input id={`rotate${ind}`} class="form__field" placeholder="Rotate" bind:value={rotate} />
+				<label for={`rotate${ind}`} class="form__label">Rotate</label>
 			</div>
 		</div>
 		<div class="form__row">

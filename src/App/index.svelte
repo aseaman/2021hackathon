@@ -49,8 +49,10 @@
   -->
   {#if Tone}
     <div class="left">
-      <button on:click={handleAddPattern}>Add</button>
-      <button on:click={handleRemovePattern}>Remove</button>
+      <div class="container__add-remove">
+        <button class="control-button" on:click={handleAddPattern}>Add</button>
+        <button class="control-button" on:click={handleRemovePattern}>Remove</button>
+      </div>
       {#each Array(currentPatterns) as _, i}
         <Euclidean {Tone} {tick} ind={i} />
       {/each}

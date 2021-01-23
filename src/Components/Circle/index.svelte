@@ -45,7 +45,7 @@
 <style src="./style.scss"></style>
 
 <svg viewBox={`0 0 ${svgSize} ${svgSize}`} >
-  <circle cx={svgSize/2} cy={svgSize/2} r={25 + circleSize/2} fill="white" fill-opacity="0.03"></circle>
+  <circle cx={svgSize/2} cy={svgSize/2} r={25 + circleSize/2} stroke="#654c0f" stroke-width="6px" fill="white" fill-opacity="0.03"></circle>
   {#each pattern as step, i}
     <circle class={leds[i].class} cx={leds[i].coords.x} cy={leds[i].coords.y} />
   {/each}

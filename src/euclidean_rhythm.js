@@ -1,4 +1,4 @@
-export default function generateEuclideanRhythm(onsets, steps) {
+export default function generateEuclideanRhythm(onsets, steps, rotate = 0) {
     const slope = onsets / steps;
     const euclidean = [];
     let previous = -1;
@@ -7,6 +7,13 @@ export default function generateEuclideanRhythm(onsets, steps) {
         const current = Math.floor(i * slope);
         euclidean.push(current !== previous ? 1 : 0);
         previous = current;
+    }
+    
+    if (rotate > 0) {
+      for (let i = 0; i < rotate; i++) {
+        const el = euclidean.pop();
+        euclidean.splice(0, 0, el);
+      }
     }
 
     return euclidean;
