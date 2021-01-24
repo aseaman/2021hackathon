@@ -1,4 +1,5 @@
 <script>
+  import { onDestroy } from 'svelte';
   import generateEuclideanRhythm from '../../euclidean_rhythm';
   import { createDrums, createBassSynthVoice, createPluckedStringSynth, getDrumNote } from '../../voices';
   import Circle from '@Components/Circle';
@@ -82,10 +83,16 @@
     }
     isPlaying = !isPlaying;
   }
-
+  
   generatePattern(); 
   let cpat = pattern;
   let active = 0;
+
+  onDestroy(() => {
+    if (sequence && !sequence.disposed) {
+      sequence.stop();
+    }
+  });
 </script>
 
 <style src="./style.scss"></style>
