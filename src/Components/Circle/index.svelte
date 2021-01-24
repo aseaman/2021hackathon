@@ -26,18 +26,32 @@
       half + half * Math.sin((Math.PI * angle) / 180) + (padding / 2)
     );
     return { x, y };
-  }
+	}
+	
+	$: if (pattern && pattern.length) {
+		const arc = 360 / pattern.length;
+		pattern.forEach((step, index) => {
+			leds[index] = {};
+			leds[index].class = `circle-${ind} ${step === 1 ? "onset" : ""}`;
+			leds[index].coords = poltocar(arc * (index+1));
+		});
+	}
 
   function blink(active) {
-    const arc = 360 / pattern.length;
-    pattern.map((step, index) => {
-      leds[index] = {};
-      //leds[index].class = index === active ? `circle-${ind} active` : `circle-${ind}`;
-      leds[index].class = `circle-${ind} ${step === 1 ? "onset" : ""} ${index === active ? "active" : ""}`;
-      leds[index].coords = poltocar(arc * (index+1));
-    });
-  };
- 
+    // const arc = 360 / pattern.length;
+    // pattern.map((step, index) => {
+    //   leds[index] = {};
+    //   //leds[index].class = index === active ? `circle-${ind} active` : `circle-${ind}`;
+    //   leds[index].class = `circle-${ind} ${step === 1 ? "onset" : ""} ${index === active ? "active" : ""}`;
+    //   leds[index].coords = poltocar(arc * (index+1));
+		// });
+		pattern.map((step, index) => {
+			if (leds[index]) {
+				leds[index].class = `circle-${ind} ${step === 1 ? "onset" : ""} ${index === active ? "active" : ""}`;
+			}
+		});
+	};
+	
   $: blink(active);
 
 </script>
