@@ -1,4 +1,4 @@
-  /* "#051e3e", "#451e3e", "#851e3e" */
+/* "#051e3e", "#451e3e", "#851e3e" */
 
 svg {
   //border: 1px solid red;
@@ -11,17 +11,23 @@ $size: 10;
 
 @for $i from 1 through 5 {
   $h: 250 * $i + 100;
-  $s: 35;
+  $s: 30;
   $l: 50;
+
   .circle-#{$i} {
     r: $size;
-    fill: hsl($h, $s * 1%, $l * 1%);
+    fill: hsl($h, $s * 1%, $l * 0.5%);
+
+    &.active {
+      r: $size * 1.2;
+    }
 
     &.onset {
-      fill: hsl($h, $s * 2%, $l * 0.5%);
+      stroke: hsl($h, 100%, 60%);
+      stroke-width: $size / 5;
+      fill: hsl($h, $s * 2.5%, $l * 0.75%);
 
       &.active {
-        r: $size * 1.2;
         fill: hsl($h, $s * 3%, $l * 1.25%); 
       }
     }
