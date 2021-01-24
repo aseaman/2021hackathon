@@ -4,9 +4,7 @@
   export let ind = 0; // when several Circles are instantiated we keep track of their indices.
   ind = parseInt(ind) + 1;
   const circleSize = 600 - ((parseInt(ind) +1) * 90);
-  // const padding = circleSize * 0.2; // making sure nothing gets clipped
   const padding = 700 - circleSize;
-  // const svgSize = circleSize + padding;
   const svgSize = circleSize + padding;
 
   let leds = {};
@@ -16,7 +14,7 @@
   }
 
   function poltocar(angle) {
-    angle = angle - 90;
+    // angle = angle - 90;
     var half = circleSize / 2;
     var x = round(
       // half + half * radius * Math.cos((Math.PI * angle) / 180)

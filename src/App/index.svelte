@@ -58,6 +58,6 @@
       {/each}
     </div>
   {:else}
-    <button class="init" on:click={handleInit}>Start</button>
+    <button class="init-button" on:click={handleInit}>Start</button>
   {/if}  
 </Layout>

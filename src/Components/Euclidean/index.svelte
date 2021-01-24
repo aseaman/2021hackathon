@@ -20,7 +20,7 @@
   let onsets = 3;
   let steps = 7;
   let rotate = 0;
-  let voice = 'bass';
+  let voice = 'string';
 
   const bassSynth = createBassSynthVoice(Tone);
   const stringSynth = createPluckedStringSynth(Tone);
@@ -42,13 +42,16 @@
         sequence.stop();
       }
     } else {
-      circlepat = pattern;
-      active = 0;
+      const indices = Array(pattern.length).fill().map((_,i) => i);
       let notes = [];
+      cpat = pattern;
       if (voice === 'bass') {
         notes = pattern.map((e) => e ? 'E2' : 'E6');
       } else if (voice === 'string') {
-        notes = pattern.map((e) => e ? 'C#3' : 'E6');
+        const pitches = ["C2", "G2", "C3", "D#3", "G3"];
+        const pitch = pitches[Math.floor(Math.random() * pitches.length)];
+        console.log(pitch);
+        notes = pattern.map((e) => e ? pitch : 'E6');
       } else {
         const drumNote = getDrumNote(voice);
         notes = pattern.map((e) => e ? drumNote : 'E6');
@@ -56,7 +59,8 @@
       if (sequence && !sequence.disposed) {
         sequence.dispose();
       }
-      sequence = new Tone.Sequence((time, note) => {
+      sequence = new Tone.Sequence((time, i) => {
+        const note = notes[i];
         if( note !== "E6" ) {
           if (voice === 'bass') {
             bassSynth.triggerAttackRelease(note, "8n", time);
@@ -67,9 +71,9 @@
           }
         }
         Tone.Draw.schedule(function() {
-          active = (active + 1) % circlepat.length
+          active = i; 
         }, time);
-      }, notes).start(0);
+      }, indices).start(0);
 
       if (Tone.Transport.state !== 'started') {
         Tone.Transport.start();
@@ -80,16 +84,15 @@
   }
 
   generatePattern(); 
-  let circlepat = pattern;
+  let cpat = pattern;
   let active = 0;
-
 </script>
 
 <style src="./style.scss"></style>
 
 <div class="container">
   <div class="container__circle">
-    <Circle pattern={circlepat} {active} {ind} />
+    <Circle pattern={cpat} {active} {ind} />
   </div>
   <div class="container__euclid-controls">
     <div class="form__row">
@@ -110,8 +113,8 @@
       <label for="voice" class="form__select-label">Voice</label>
       <div id="voice" class="form__select">
         <select bind:value={voice}>
-          <option value="bass">Bass Synth</option>
           <option value="string">String Synth</option>
+          <option value="bass">Bass Synth</option>
           <option value="kick">Kick</option>
           <option value="kick2">Kick 2</option>
           <option value="snare">Snare</option>
