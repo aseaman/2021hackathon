@@ -18,8 +18,8 @@
   let sequence = null;
   let pattern = [];
   let isPlaying = false;
-  let onsets = 3;
-  let steps = 7;
+  let onsets = 7;
+  let steps = 16;
   let rotate = 0;
   let voice = 'string';
 
